@@ -11,142 +11,40 @@ get_header();
         <section class="team-one team-page">
             <div class="container">
                 <div class="row">
-                    <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="200ms">
-                        <!--Team One Single-->
-                        <div class="team-one__single">
-                            <div class="team-one__img">
-                                <img src="assets/images/team/team-page-img-1.jpg" alt="">
-                                <div class="team-one__details">
-                                    <p class="team-one__title">Developer</p>
-                                    <h4 class="team-one__name">Sarah albert</h4>
-                                </div>
-                                <div class="team-one__social">
-                                    <a href="#"><i class="fab fa-twitter"></i></a>
-                                    <a href="#"><i class="fab fa-facebook"></i></a>
-                                    <a href="#"><i class="fab fa-instagram"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="400ms">
-                        <!--Team One Single-->
-                        <div class="team-one__single">
-                            <div class="team-one__img">
-                                <img src="assets/images/team/team-page-img-2.jpg" alt="">
-                                <div class="team-one__details">
-                                    <p class="team-one__title">Developer</p>
-                                    <h4 class="team-one__name">Sarah albert</h4>
-                                </div>
-                                <div class="team-one__social">
-                                    <a href="#"><i class="fab fa-twitter"></i></a>
-                                    <a href="#"><i class="fab fa-facebook"></i></a>
-                                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <?php 
+                    
+                    $args = array(
+                        'posts_per_page' => 8,
+                        'post_type' => 'teams'
+                    );
+                    $query =  new WP_Query($args);
+                    while($query->have_posts()){
+                        $query->the_post(); ?>
+                        <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="200ms">
+                            <!--Team One Single-->
+                            <div class="team-one__single">
+                                <div class="team-one__img">
+                                    <img src="<?php echo the_post_thumbnail_url('team-image'); ?>" alt="">
+                                    <div class="team-one__details">
+                                        <p class="team-one__title"><?php the_field('designation'); ?></p>
+                                        <h4 class="team-one__name"><?php the_title(); ?></h4>
+                                    </div>
+                                    <div class="team-one__social">
+                                        <?php 
+                                        $socials = get_field('socials');
+                                        foreach($socials as $social){ ?>
+                                            <a href="<?php echo $social['social_link']; ?>"><i class="<?php echo $social['social_icon']; ?>"></i></a>
+                                        <?php }
+                                        ?>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="600ms">
-                        <!--Team One Single-->
-                        <div class="team-one__single">
-                            <div class="team-one__img">
-                                <img src="assets/images/team/team-page-img-3.jpg" alt="">
-                                <div class="team-one__details">
-                                    <p class="team-one__title">Developer</p>
-                                    <h4 class="team-one__name">Sarah albert</h4>
-                                </div>
-                                <div class="team-one__social">
-                                    <a href="#"><i class="fab fa-twitter"></i></a>
-                                    <a href="#"><i class="fab fa-facebook"></i></a>
-                                    <a href="#"><i class="fab fa-instagram"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="800ms">
-                        <!--Team One Single-->
-                        <div class="team-one__single">
-                            <div class="team-one__img">
-                                <img src="assets/images/team/team-page-img-4.jpg" alt="">
-                                <div class="team-one__details">
-                                    <p class="team-one__title">Developer</p>
-                                    <h4 class="team-one__name">Sarah albert</h4>
-                                </div>
-                                <div class="team-one__social">
-                                    <a href="#"><i class="fab fa-twitter"></i></a>
-                                    <a href="#"><i class="fab fa-facebook"></i></a>
-                                    <a href="#"><i class="fab fa-instagram"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="1000ms">
-                        <!--Team One Single-->
-                        <div class="team-one__single">
-                            <div class="team-one__img">
-                                <img src="assets/images/team/team-page-img-5.jpg" alt="">
-                                <div class="team-one__details">
-                                    <p class="team-one__title">Developer</p>
-                                    <h4 class="team-one__name">Sarah albert</h4>
-                                </div>
-                                <div class="team-one__social">
-                                    <a href="#"><i class="fab fa-twitter"></i></a>
-                                    <a href="#"><i class="fab fa-facebook"></i></a>
-                                    <a href="#"><i class="fab fa-instagram"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="1200ms">
-                        <!--Team One Single-->
-                        <div class="team-one__single">
-                            <div class="team-one__img">
-                                <img src="assets/images/team/team-page-img-6.jpg" alt="">
-                                <div class="team-one__details">
-                                    <p class="team-one__title">Developer</p>
-                                    <h4 class="team-one__name">Sarah albert</h4>
-                                </div>
-                                <div class="team-one__social">
-                                    <a href="#"><i class="fab fa-twitter"></i></a>
-                                    <a href="#"><i class="fab fa-facebook"></i></a>
-                                    <a href="#"><i class="fab fa-instagram"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="1400ms">
-                        <!--Team One Single-->
-                        <div class="team-one__single">
-                            <div class="team-one__img">
-                                <img src="assets/images/team/team-page-img-7.jpg" alt="">
-                                <div class="team-one__details">
-                                    <p class="team-one__title">Developer</p>
-                                    <h4 class="team-one__name">Sarah albert</h4>
-                                </div>
-                                <div class="team-one__social">
-                                    <a href="#"><i class="fab fa-twitter"></i></a>
-                                    <a href="#"><i class="fab fa-facebook"></i></a>
-                                    <a href="#"><i class="fab fa-instagram"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="1600ms">
-                        <!--Team One Single-->
-                        <div class="team-one__single">
-                            <div class="team-one__img">
-                                <img src="assets/images/team/team-page-img-8.jpg" alt="">
-                                <div class="team-one__details">
-                                    <p class="team-one__title">Developer</p>
-                                    <h4 class="team-one__name">Sarah albert</h4>
-                                </div>
-                                <div class="team-one__social">
-                                    <a href="#"><i class="fab fa-twitter"></i></a>
-                                    <a href="#"><i class="fab fa-facebook"></i></a>
-                                    <a href="#"><i class="fab fa-instagram"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <?php }
+                    
+                    ?>
+                
+
                 </div>
             </div>
         </section>
@@ -162,14 +60,14 @@ get_header();
                             <div class="cta-one__box-2"></div>
                             <div class="cta-one__left">
                                 <div class="cta-one__icon">
-                                    <span class="icon-consulting"></span>
+                                    <span class="<?php echo the_field('cta_icon','option'); ?>"></span>
                                 </div>
                                 <div class="cta-one__title-box">
-                                    <h2 class="cta-one__title">we’re delivering the best <br> customer experience</h2>
+                                    <h2 class="cta-one__title"><?php echo the_field('cta_title','option'); ?></h2>
                                 </div>
                             </div>
                             <div class="cta-one__right">
-                                <a href="contact.html" class="thm-btn cta-one__btn">let’s get started</a>
+                                <a href="<?php echo the_field('cta_button_link','option'); ?>" class="thm-btn cta-one__btn"><?php echo the_field('cta_button_name','option'); ?></a>
                             </div>
                         </div>
                     </div>

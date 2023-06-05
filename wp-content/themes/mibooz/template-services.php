@@ -10,64 +10,63 @@ get_header();
         <!--Services Three Start-->
         <section class="services-three">
             <div class="services-three-shape"
-                style="background-image: url(assets/images/shapes/services-three-shape.png)"></div>
+                style="background-image: url(<?php esc_url(the_field('service_page_background_shape_1','option')); ?>)"></div>
             <div class="container">
                 <div class="section-title text-center">
-                    <span class="section-title__tagline">check our services list</span>
-                    <h2 class="section-title__title">what we’re offering</h2>
+                    <span class="section-title__tagline">
+                    <?php 
+                    if(get_field('service_page_subtitle','option')){
+                        esc_attr(the_field('service_page_subtitle','option'));
+                    }else{ echo esc_attr(acf_get_field('service_page_subtitle')['default_value']);}
+                    ?>
+                    </span>
+                    <h2 class="section-title__title">
+                    <?php 
+                    if(get_field('service_page_main_title','option')){
+                        esc_attr(the_field('service_page_main_title','option'));
+                    }else{ echo esc_attr(acf_get_field('service_page_main_title')['default_value']);}
+                    ?>
+                    </h2>
                 </div>
                 <div class="services-three__top">
                     <div class="row">
+
+                    <?php 
+                    
+                    $args = array(
+                        'post_type' => 'services',
+                        'posts_per_page' => 3
+                     );
+                    $query = new WP_Query($args);
+                    while($query->have_posts()){
+                        $query->the_post(); ?>
                         <div class="col-xl-4 col-lg-4 wow fadeInUp" data-wow-delay="200ms">
                             <!--Services Three Single-->
                             <div class="services-three__single">
                                 <div class="services-three_icon">
-                                    <span class="icon-online-shopping"></span>
+                                    <span class="<?php the_field('service_icon'); ?>"></span>
                                 </div>
-                                <h3 class="services-three__title"><a href="mobile-application.html">mobile <br>
-                                        application</a></h3>
-                                <p class="services-three__text">Lorem ipsum is noted are many variations of have in pass
-                                    majy.</p>
+                                <h3 class="services-three__title"><a href="<?php esc_url(the_permalink()); ?>"><?php esc_attr(the_title()); ?></a></h3>
+                                <p class="services-three__text"><?php echo wp_trim_words( get_the_content(), 10 ); ?></p>
                                 <div class="services-three__btn-box">
-                                    <a href="mobile-application.html" class="services-three__btn">Read More</a>
+                                    <a href="<?php esc_url(the_permalink()); ?>" class="services-three__btn">Read more</a>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-4 col-lg-4 wow fadeInUp" data-wow-delay="400ms">
-                            <!--Services Three Single-->
-                            <div class="services-three__single">
-                                <div class="services-three_icon">
-                                    <span class="icon-growth"></span>
-                                </div>
-                                <h3 class="services-three__title"><a href="digital-marketing.html">digital <br>
-                                        marketing</a></h3>
-                                <p class="services-three__text">Lorem ipsum is noted are many variations of have in pass
-                                    majy.</p>
-                                <div class="services-three__btn-box">
-                                    <a href="digital-marketing.html" class="services-three__btn">Read More</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 wow fadeInUp" data-wow-delay="600ms">
-                            <!--Services Three Single-->
-                            <div class="services-three__single">
-                                <div class="services-three_icon">
-                                    <span class="icon-front-end"></span>
-                                </div>
-                                <h3 class="services-three__title"><a href="website-development.html">Website <br>
-                                        development</a></h3>
-                                <p class="services-three__text">Lorem ipsum is noted are many variations of have in pass
-                                    majy.</p>
-                                <div class="services-three__btn-box">
-                                    <a href="website-development.html" class="services-three__btn">Read More</a>
-                                </div>
-                            </div>
-                        </div>
+                    <?php }
+
+                    wp_reset_postdata(  );
+                    
+                    ?>
+                        
+
                     </div>
                 </div>
                 <div class="services-three__bottom">
-                    <p class="services-three__bottom-text">Mibooz services built specifically for your business. <a
-                            href="about.html">Find Your Solution</a></p>
+                    <p class="services-three__bottom-text">
+                        <?php $value = get_field('additional_subtitle_and_title','option'); ?>
+                        <?php echo esc_attr($value['additional_subtitle']);?><a href="<?php echo esc_url($value['additional_title_link']);?>">
+                        <?php echo esc_attr($value['additional_title']);?></a></p>
                 </div>
             </div>
         </section>
@@ -80,12 +79,13 @@ get_header();
                     <div class="col-xl-6 col-lg-6 wow slideInLeft" data-wow-delay="100ms" data-wow-duration="2500ms">
                         <!--Two Boxes Single-->
                         <div class="two-boxes__single">
+                            <?php $box = get_field('service_page_box','option'); ?>
                             <div class="two-boxes__bg"
-                                style="background-image: url(assets/images/backgrounds/two-boxes-bg-1.jpg)"></div>
-                            <p class="two-boxes__tagline">extra features</p>
-                            <h4 class="two-boxes__title">Lorem Ipsum available, but the majority is have suffered.</h4>
+                                style="background-image: url(<?php echo $box['box_1_image']; ?>)"></div>
+                            <p class="two-boxes__tagline"><?php echo $box['box_1_subtitle']; ?></p>
+                            <h4 class="two-boxes__title"><?php echo $box['box_1_title']; ?></h4>
                             <div class="two-boxes__arrow">
-                                <a href="#"><span class="icon-arrow-right"></span></a>
+                                <a href="<?php echo $box['box_1_link']; ?>"><span class="icon-arrow-right"></span></a>
                             </div>
                         </div>
                     </div>
@@ -93,11 +93,11 @@ get_header();
                         <!--Two Boxes Single-->
                         <div class="two-boxes__single">
                             <div class="two-boxes__bg"
-                                style="background-image: url(assets/images/backgrounds/two-boxes-bg-2.jpg)"></div>
-                            <p class="two-boxes__tagline">extra features</p>
-                            <h4 class="two-boxes__title">Lorem Ipsum available, but the majority is have suffered.</h4>
+                                style="background-image: url(<?php echo $box['box_2_image']; ?>)"></div>
+                            <p class="two-boxes__tagline"><?php echo $box['box_2_subtitle']; ?></p>
+                            <h4 class="two-boxes__title"><?php echo $box['box__2_title']; ?></h4>
                             <div class="two-boxes__arrow">
-                                <a href="#"><span class="icon-arrow-right"></span></a>
+                                <a href="<?php echo $box['box_2_link']; ?>"><span class="icon-arrow-right"></span></a>
                             </div>
                         </div>
                     </div>
@@ -108,7 +108,7 @@ get_header();
 
         <!--Services One Start-->
         <section class="services-one">
-            <div class="services-one-shape" style="background-image: url(assets/images/shapes/services-one-shape.png)">
+            <div class="services-one-shape" style="background-image: url(<?php echo the_field('service_page_background_shapes','option'); ?>)">
             </div>
             <div class="container">
                 <div class="services-one__top">
@@ -116,89 +116,44 @@ get_header();
                         <div class="col-xl-7 col-lg-6">
                             <div class="services-one__top-left">
                                 <div class="section-title text-left">
-                                    <span class="section-title__tagline">Our Services</span>
-                                    <h2 class="section-title__title">We Shape the <br> Perfect solution</h2>
+                                    <span class="section-title__tagline"><?php the_field('service_page_subtitle','option'); ?></span>
+                                    <h2 class="section-title__title"><?php the_field('service_page_main_title','option'); ?></h2>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xl-5 col-lg-6">
                             <div class="services-one__top-right">
-                                <p class="services-one__top-text">We are committed to providing our customers with not
-                                    service while offering our emod tempor incididunt ut labore employees the best
-                                    training.</p>
+                                <p class="services-one__top-text"><?php the_field('service_page_content','option'); ?></p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="services-one__bottom">
                     <div class="row">
-                        <div class="col-xl-4 col-lg-4 wow fadeInUp" data-wow-delay="100ms">
-                            <!--Services One Single-->
-                            <div class="services-one__single">
-                                <h3 class="services-one__title"><a href="mobile-application.html">mobile <br>
-                                        applications</a></h3>
-                                <div class="services-one__icon">
-                                    <span class="icon-online-shopping"></span>
-                                </div>
-                                <div class="services-one__count"></div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 wow fadeInUp" data-wow-delay="200ms">
-                            <!--Services One Single-->
-                            <div class="services-one__single">
-                                <h3 class="services-one__title"><a href="digital-marketing.html">digital <br>
-                                        marketings</a></h3>
-                                <div class="services-one__icon">
-                                    <span class="icon-growth"></span>
-                                </div>
-                                <div class="services-one__count"></div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 wow fadeInUp" data-wow-delay="300ms">
-                            <!--Services One Single-->
-                            <div class="services-one__single">
-                                <h3 class="services-one__title"><a href="graphic-designing.html">Graphic <br>
-                                        Designings</a></h3>
-                                <div class="services-one__icon">
-                                    <span class="icon-webpage"></span>
-                                </div>
-                                <div class="services-one__count"></div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 wow fadeInUp" data-wow-delay="400ms">
-                            <!--Services One Single-->
-                            <div class="services-one__single">
-                                <h3 class="services-one__title"><a href="website-development.html">Website <br>
-                                        developments</a></h3>
-                                <div class="services-one__icon">
-                                    <span class="icon-front-end"></span>
-                                </div>
-                                <div class="services-one__count"></div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 wow fadeInUp" data-wow-delay="500ms">
-                            <!--Services One Single-->
-                            <div class="services-one__single">
-                                <h3 class="services-one__title"><a href="social-marketing.html">Social <br>
-                                        marketings</a></h3>
-                                <div class="services-one__icon">
-                                    <span class="icon-bullhorn"></span>
-                                </div>
-                                <div class="services-one__count"></div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 wow fadeInUp" data-wow-delay="600ms">
-                            <!--Services One Single-->
-                            <div class="services-one__view-all">
-                                <div class="services-one__view-all-title-box">
-                                    <h3 class="services-one__view-all-title"><a href="services.html">View our <br> all
-                                            services</a></h3>
-                                </div>
-                                <div class="services-one__view-all-arrow">
-                                    <a href="services.html"><span class="icon-arrow-right"></span></a>
-                                </div>
-                            </div>
-                        </div>
+
+                        <?php
+                            $args = array(
+                                'post_type' => 'services',
+                                'posts_per_page' => 6
+                            );
+                            $query = new WP_Query($args);
+                            while($query->have_posts()){
+                                $query->the_post(); ?>
+                                <div class="col-xl-4 col-lg-4 wow fadeInUp" data-wow-delay="100ms">
+                                    <!--Services One Single-->
+                                    <div class="services-one__single">
+                                        <h3 class="services-one__title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+                                        <div class="services-one__icon">
+                                            <span class="<?php the_field('service_icon'); ?>"></span>
+                                        </div>
+                                        <div class="services-one__count"></div>
+                                    </div>
+                                </div> 
+                            <?php }
+
+                            wp_reset_postdata(  );
+                        ?>  
+      
                     </div>
                 </div>
             </div>
@@ -208,17 +163,19 @@ get_header();
         <!--Design Studio Start-->
         <section class="design-studio services-page-design-studio">
             <div class="design-studio-bg-box">
+                <?php $video = get_field('service_page_video','option'); ?>
                 <div class="design-studio-bg jarallax" data-jarallax data-speed="0.2" data-imgPosition="50% 0%"
-                    style="background-image: url(assets/images/backgrounds/design-studio-bg.jpg)">
+                    style="background-image: url(<?php echo $video['video_background_image']; ?>)">
 
                 </div>
             </div>
             <div class="container">
                 <div class="col-lg-12">
                     <div class="design-studio__inner">
-                        <h2 class="design-studio__title">Design <span>Studio</span> that gets <br> excited about</h2>
+                        
+                        <h2 class="design-studio__title"><?php echo $video['video_title']; ?></h2>
                         <div class="design-studio__video-link">
-                            <a href="https://www.youtube.com/watch?v=Get7rqXYrbQ" class="video-popup">
+                            <a href="<?php echo $video['video_url']; ?>" class="video-popup">
                                 <div class="design-studio__video-icon">
                                     <span class="icon-play-button"></span>
                                     <i class="ripple"></i>
@@ -235,44 +192,44 @@ get_header();
         <section class="services-two services-page-services-two">
             <div class="container">
                 <div class="section-title text-center">
-                    <span class="section-title__tagline">check our services list</span>
-                    <h2 class="section-title__title">what we’re offering</h2>
+                    <span class="section-title__tagline">
+                    <?php 
+                    if(get_field('service_page_subtitle','option')){
+                        esc_attr(the_field('service_page_subtitle','option'));
+                    }else{ echo esc_attr(acf_get_field('service_page_subtitle')['default_value']);}
+                    ?>
+                    </span>
+                    <h2 class="section-title__title">
+                    <?php 
+                    if(get_field('service_page_main_title','option')){
+                        esc_attr(the_field('service_page_main_title','option'));
+                    }else{ echo esc_attr(acf_get_field('service_page_main_title')['default_value']);}
+                    ?>
+                    </h2>
                 </div>
                 <ul class="list-unstyled clearfix services-two__list">
-                    <!--Services Two Single-->
-                    <li class="services-two__single wow fadeInUp" data-wow-delay="200ms">
-                        <div class="services-two__icon">
-                            <span class="icon-online-shopping"></span>
-                        </div>
-                        <h3 class="services-two__title"><a href="mobile-application.html">mobile <br> application</a>
-                        </h3>
-                        <p class="services-two__text">Lorem ipsum is noted are many variations of have in pass majy.</p>
-                    </li>
-                    <!--Services Two Single-->
-                    <li class="services-two__single wow fadeInUp" data-wow-delay="400ms">
-                        <div class="services-two__icon">
-                            <span class="icon-growth"></span>
-                        </div>
-                        <h3 class="services-two__title"><a href="digital-marketing.html">digital <br> marketing</a></h3>
-                        <p class="services-two__text">Lorem ipsum is noted are many variations of have in pass majy.</p>
-                    </li>
-                    <!--Services Two Single-->
-                    <li class="services-two__single wow fadeInUp" data-wow-delay="600ms">
-                        <div class="services-two__icon">
-                            <span class="icon-webpage"></span>
-                        </div>
-                        <h3 class="services-two__title"><a href="graphic-designing.html">Graphic <br> Designing</a></h3>
-                        <p class="services-two__text">Lorem ipsum is noted are many variations of have in pass majy.</p>
-                    </li>
-                    <!--Services Two Single-->
-                    <li class="services-two__single wow fadeInUp" data-wow-delay="800ms">
-                        <div class="services-two__icon">
-                            <span class="icon-front-end"></span>
-                        </div>
-                        <h3 class="services-two__title"><a href="website-development.html">Website <br> development</a>
-                        </h3>
-                        <p class="services-two__text">Lorem ipsum is noted are many variations of have in pass majy.</p>
-                    </li>
+                    <?php 
+                    
+                    $args = array(
+                        'post_type' => 'services',
+                        'posts_per_page' => 4
+                     );
+                    $query = new WP_Query($args);
+                    while($query->have_posts()){
+                        $query->the_post(); ?>
+                        <!--Services Two Single-->
+                        <li class="services-two__single wow fadeInUp" data-wow-delay="200ms">
+                            <div class="services-two__icon">
+                                <span class="<?php the_field('service_icon'); ?>"></span>
+                            </div>
+                            <h3 class="services-two__title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                            </h3>
+                            <p class="services-two__text"><?php echo wp_trim_words( get_the_content(), 10 ); ?></p>
+                        </li>
+                    <?php }
+                    wp_reset_postdata(  );
+                    ?>
+                    
                 </ul>
             </div>
         </section>
@@ -308,36 +265,17 @@ get_header();
                     }
                 }}'>
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <img src="assets/images/brand/brand-1-1.png" alt="">
-                        </div><!-- /.swiper-slide -->
-                        <div class="swiper-slide">
-                            <img src="assets/images/brand/brand-1-2.png" alt="">
-                        </div><!-- /.swiper-slide -->
-                        <div class="swiper-slide">
-                            <img src="assets/images/brand/brand-1-3.png" alt="">
-                        </div><!-- /.swiper-slide -->
-                        <div class="swiper-slide">
-                            <img src="assets/images/brand/brand-1-4.png" alt="">
-                        </div><!-- /.swiper-slide -->
-                        <div class="swiper-slide">
-                            <img src="assets/images/brand/brand-1-5.png" alt="">
-                        </div><!-- /.swiper-slide -->
-                        <div class="swiper-slide">
-                            <img src="assets/images/brand/brand-1-1.png" alt="">
-                        </div><!-- /.swiper-slide -->
-                        <div class="swiper-slide">
-                            <img src="assets/images/brand/brand-1-2.png" alt="">
-                        </div><!-- /.swiper-slide -->
-                        <div class="swiper-slide">
-                            <img src="assets/images/brand/brand-1-3.png" alt="">
-                        </div><!-- /.swiper-slide -->
-                        <div class="swiper-slide">
-                            <img src="assets/images/brand/brand-1-4.png" alt="">
-                        </div><!-- /.swiper-slide -->
-                        <div class="swiper-slide">
-                            <img src="assets/images/brand/brand-1-5.png" alt="">
-                        </div><!-- /.swiper-slide -->
+                        <?php $images = get_field('service_page_carousel','option'); 
+
+                            foreach($images as $image){?>
+                                <div class="swiper-slide">
+                                    <img src="<?php echo $image['url']; ?>" alt="">
+                                </div><!-- /.swiper-slide -->
+                            <?php }
+                        
+                        ?>
+                        
+
                     </div>
                 </div>
             </div>

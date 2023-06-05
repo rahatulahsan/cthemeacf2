@@ -57,6 +57,7 @@ body.locked {
 
 a {
     color: var(--mibooz-gray);
+    text-decoration: none!important;
 }
 
 a,

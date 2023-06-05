@@ -25,174 +25,48 @@ get_header();
         <section class="blog-page">
             <div class="container">
                 <div class="row">
-                    <div class="col-xl-4 col-lg-4 wow fadeInUp" data-wow-delay="200ms">
-                        <!--Blog One Single-->
-                        <div class="blog-one__single">
-                            <div class="blog-one__img">
-                                <img src="assets/images/blog/blog-page-img-1.jpg" alt="">
-                                <a href="blog-details.html">
-                                    <span class="blog-one__plus"></span>
-                                </a>
-                                <div class="blog-one__date">
-                                    <p>26 aug</p>
+
+
+                    <?php 
+                    
+                    $i=200;
+                    while(have_posts()){
+                        the_post(); ?>
+
+                        <div class="col-xl-4 col-lg-4 wow fadeInUp" data-wow-delay="200ms">
+                            <!--Blog One Single-->
+                            <div class="blog-one__single">
+                                <div class="blog-one__img">
+                                    <img src="<?php echo esc_url(the_post_thumbnail_url('post-page-image')); ?>" alt="">
+                                    <a href="<?php the_permalink(); ?>">
+                                        <span class="blog-one__plus"></span>
+                                    </a>
+                                    <div class="blog-one__date">
+                                        <p><?php the_time('j F'); ?></p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="blog-content">
-                                <ul class="list-unstyled blog-one__meta">
-                                    <li><a href="blog-details.html"><i class="far fa-user-circle"></i> By admin</a></li>
-                                    <li><span>/</span></li>
-                                    <li><a href="blog-details.html"><i class="far fa-comments"></i> 2 Comments</a>
-                                    </li>
-                                </ul>
-                                <h3 class="blog-one__title">
-                                    <a href="blog-details.html">How much does a website cost to build</a>
-                                </h3>
-                                <div class="blog-one__read-btn">
-                                    <a href="blog-details.html">Read More</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 wow fadeInUp" data-wow-delay="400ms">
-                        <!--Blog One Single-->
-                        <div class="blog-one__single">
-                            <div class="blog-one__img">
-                                <img src="assets/images/blog/blog-page-img-2.jpg" alt="">
-                                <a href="blog-details.html">
-                                    <span class="blog-one__plus"></span>
-                                </a>
-                                <div class="blog-one__date">
-                                    <p>26 aug</p>
-                                </div>
-                            </div>
-                            <div class="blog-content">
-                                <ul class="list-unstyled blog-one__meta">
-                                    <li><a href="blog-details.html"><i class="far fa-user-circle"></i> By admin</a></li>
-                                    <li><span>/</span></li>
-                                    <li><a href="blog-details.html"><i class="far fa-comments"></i> 2 Comments</a>
-                                    </li>
-                                </ul>
-                                <h3 class="blog-one__title">
-                                    <a href="blog-details.html">Uniquely enable accurate supply chains</a>
-                                </h3>
-                                <div class="blog-one__read-btn">
-                                    <a href="blog-details.html">Read More</a>
+                                <div class="blog-content">
+                                    <ul class="list-unstyled blog-one__meta">
+                                        <?php $author_id = get_post_field('post_author', get_the_ID()); ?>
+                                        <li><a href="<?php echo esc_url( get_author_posts_url( $author_id ) ); ?>"><i class="far fa-user-circle"></i><?php the_author(); ?></a></li>
+                                        <li><span>/</span></li>
+                                        <li><a href="<?php the_permalink(); ?>"><i class="far fa-comments"></i> <?php echo get_comments_number(); ?> Comments</a>
+                                        </li>
+                                    </ul>
+                                    <h3 class="blog-one__title">
+                                        <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                                    </h3>
+                                    <div class="blog-one__read-btn">
+                                        <a href="<?php the_permalink(); ?>">Read More</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 wow fadeInUp" data-wow-delay="600ms">
-                        <!--Blog One Single-->
-                        <div class="blog-one__single">
-                            <div class="blog-one__img">
-                                <img src="assets/images/blog/blog-page-img-3.jpg" alt="">
-                                <a href="blog-details.html">
-                                    <span class="blog-one__plus"></span>
-                                </a>
-                                <div class="blog-one__date">
-                                    <p>26 aug</p>
-                                </div>
-                            </div>
-                            <div class="blog-content">
-                                <ul class="list-unstyled blog-one__meta">
-                                    <li><a href="blog-details.html"><i class="far fa-user-circle"></i> By admin</a></li>
-                                    <li><span>/</span></li>
-                                    <li><a href="blog-details.html"><i class="far fa-comments"></i> 2 Comments</a>
-                                    </li>
-                                </ul>
-                                <h3 class="blog-one__title">
-                                    <a href="blog-details.html">task researched data enterprise process</a>
-                                </h3>
-                                <div class="blog-one__read-btn">
-                                    <a href="blog-details.html">Read More</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 wow fadeInUp" data-wow-delay="800ms">
-                        <!--Blog One Single-->
-                        <div class="blog-one__single">
-                            <div class="blog-one__img">
-                                <img src="assets/images/blog/blog-page-img-4.jpg" alt="">
-                                <a href="blog-details.html">
-                                    <span class="blog-one__plus"></span>
-                                </a>
-                                <div class="blog-one__date">
-                                    <p>26 aug</p>
-                                </div>
-                            </div>
-                            <div class="blog-content">
-                                <ul class="list-unstyled blog-one__meta">
-                                    <li><a href="blog-details.html"><i class="far fa-user-circle"></i> By admin</a></li>
-                                    <li><span>/</span></li>
-                                    <li><a href="blog-details.html"><i class="far fa-comments"></i> 2 Comments</a>
-                                    </li>
-                                </ul>
-                                <h3 class="blog-one__title">
-                                    <a href="blog-details.html">utilize enterprise experiences via 24/7 markets.</a>
-                                </h3>
-                                <div class="blog-one__read-btn">
-                                    <a href="blog-details.html">Read More</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 wow fadeInUp" data-wow-delay="1000ms">
-                        <!--Blog One Single-->
-                        <div class="blog-one__single">
-                            <div class="blog-one__img">
-                                <img src="assets/images/blog/blog-page-img-5.jpg" alt="">
-                                <a href="blog-details.html">
-                                    <span class="blog-one__plus"></span>
-                                </a>
-                                <div class="blog-one__date">
-                                    <p>26 aug</p>
-                                </div>
-                            </div>
-                            <div class="blog-content">
-                                <ul class="list-unstyled blog-one__meta">
-                                    <li><a href="blog-details.html"><i class="far fa-user-circle"></i> By admin</a></li>
-                                    <li><span>/</span></li>
-                                    <li><a href="blog-details.html"><i class="far fa-comments"></i> 2 Comments</a>
-                                    </li>
-                                </ul>
-                                <h3 class="blog-one__title">
-                                    <a href="blog-details.html">actualize front-end processes with effective</a>
-                                </h3>
-                                <div class="blog-one__read-btn">
-                                    <a href="blog-details.html">Read More</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 wow fadeInUp" data-wow-delay="1200ms">
-                        <!--Blog One Single-->
-                        <div class="blog-one__single">
-                            <div class="blog-one__img">
-                                <img src="assets/images/blog/blog-page-img-6.jpg" alt="">
-                                <a href="blog-details.html">
-                                    <span class="blog-one__plus"></span>
-                                </a>
-                                <div class="blog-one__date">
-                                    <p>26 aug</p>
-                                </div>
-                            </div>
-                            <div class="blog-content">
-                                <ul class="list-unstyled blog-one__meta">
-                                    <li><a href="blog-details.html"><i class="far fa-user-circle"></i> By admin</a></li>
-                                    <li><span>/</span></li>
-                                    <li><a href="blog-details.html"><i class="far fa-comments"></i> 2 Comments</a>
-                                    </li>
-                                </ul>
-                                <h3 class="blog-one__title">
-                                    <a href="blog-details.html">array of niche markets through robust products</a>
-                                </h3>
-                                <div class="blog-one__read-btn">
-                                    <a href="blog-details.html">Read More</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
+                    <?php }
+                    
+                    ?>
+                
                 </div>
                 <div class="blog-sidebar__load-more text-center">
                     <a href="blog-details.html" class="thm-btn blog-sidebar__load-more-btn">Load more
