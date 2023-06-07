@@ -7,34 +7,22 @@
 				<div class="row">
 					<div class="col-xl-4 col-lg-5">
 						<div class="service-details__sidebar">
-							<div class="service-details__sidebar-service">
-								<h4 class="service-details__sidebar-title">Categories</h4>
-								<ul class="service-details__sidebar-service-list list-unstyled">
-									<li><a href="mobile-application.html">Mobile Application <span
-												class="icon-arrow-right"></span></a></li>
-									<li><a href="digital-marketing.html">Digital Marketing <span
-												class="icon-arrow-right"></span></a></li>
-									<li><a href="graphic-designing.html">Graphic Designing <span
-												class="icon-arrow-right"></span></a></li>
-									<li><a href="website-development.html">Website Development <span
-												class="icon-arrow-right"></span></a></li>
-									<li><a href="social-marketing.html">Social Marketing <span
-												class="icon-arrow-right"></span></a></li>
-									<li><a href="content-writing.html">Content Writting <span
-												class="icon-arrow-right"></span></a></li>
-								</ul>
-							</div>
 							<div class="service-details__need-help">
 								<div class="service-details__need-help-bg"
 									style="background-image: url(assets/images/backgrounds/service-details-need-help-bg.jpg)">
 								</div>
+								<?php 
+								
+								$service_box = get_field('single_services_sidebar','option');
+
+								?>
 								<div class="service-details__need-help-icon">
-									<span class="icon-phone-call"></span>
+									<span class="<?php echo $service_box['icon']; ?>"></span>
 								</div>
-								<h2 class="service-details__need-help-title">Best Quality <br> services</h2>
+								<h2 class="service-details__need-help-title"><?php echo $service_box['title']; ?></h2>
 								<div class="service-details__need-help-contact">
-									<p>Call us Anytime</p>
-									<a href="tel:926668880000">+ 92 666 888 0000</a>
+									<p><?php echo $service_box['phone_no_title']; ?></p>
+									<a href="tel:<?php echo $service_box['phone_no']; ?>"><?php echo $service_box['phone_no']; ?></a>
 								</div>
 							</div>
 						</div>
@@ -82,7 +70,6 @@
 												<?php }
 													
 												?>
-
 
 											</ul>
 										</div>

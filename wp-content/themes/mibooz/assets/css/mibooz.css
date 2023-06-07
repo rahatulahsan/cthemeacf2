@@ -8532,3 +8532,27 @@ ul {
 .error-page__btn {
     color: var(--mibooz-black);
 }
+
+/* Footer Widget CSS */
+.footer-widget__column.footer-widget__contact h3 {
+    color: #fff!important;
+    font-size: 18px!important;
+}
+.footer-widget__column.footer-widget__contact p {
+    color: #807e85!important;
+}
+.footer-widget__column.footer-widget__contact a {
+    color: #fff!important;
+}
+.footer-widget__column.footer-widget__contact a:hover {
+    color: #fff!important;
+}
+
+ul.footer-widget__links-list.list-unstyled.clearfix h3 {
+    color: #fff!important;
+    font-size: 18px!important;
+}
+
+ul.footer-widget__links-list.list-unstyled.clearfix ul {
+    padding-left: 0px!important;
+}

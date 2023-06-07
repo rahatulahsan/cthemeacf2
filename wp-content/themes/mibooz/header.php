@@ -1,21 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html <?php language_attributes(); ?>>
 
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="<?php bloginfo('charset'); ?>" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <?php wp_head(); ?>
     <!-- favicons Icons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="<?php echo get_template_directory_uri().'/assets/images/favicons/apple-touch-icon.png' ?>" />
-    <link rel="icon" type="image/png" sizes="32x32" href="<?php echo get_template_directory_uri().'/assets/images/favicons/favicon-32x32.png' ?>" />
-    <link rel="icon" type="image/png" sizes="16x16" href="<?php echo get_template_directory_uri(  ).'/assets/images/favicons/favicon-16x16.png' ?>" />
+    <?php $fav_logo = get_field('favicon_&_logo_settings','option'); ?>
+    <link rel="apple-touch-icon" sizes="180x180" href="<?php echo esc_url($fav_logo['favicon_180_by_180']); ?>" />
+    <link rel="icon" type="image/png" sizes="32x32" href="<?php echo esc_url($fav_logo['favicon_32x32']); ?>" />
+    <link rel="icon" type="image/png" sizes="16x16" href="<?php echo esc_url($fav_logo['favicon_16x16']); ?>" />
     <link rel="manifest" href="<?php echo get_template_directory_uri(  ).'/assets/images/favicons/site.webmanifest' ?>" />
 
 </head>
 
-<body>
+<body <?php body_class(); ?>>
     <div class="preloader">
-        <img class="preloader__image" width="60" src="<?php echo get_template_directory_uri().'/assets/images/loader.png' ?>" alt="" />
+        <img class="preloader__image" width="60" src="<?php echo esc_url($fav_logo['preloader_image']); ?>" alt="<?php echo esc_attr(get_bloginfo('name')); ?>" />
     </div>
     <!-- /.preloader -->
     <div class="page-wrapper">
@@ -23,7 +24,7 @@
             <nav class="main-menu clearfix">
                 <div class="main-menu-wrapper">
                     <div class="main-menu-wrapper__logo">
-                        <a href="index.html"><img src="<?php echo get_template_directory_uri(  ).'/assets/images/resources/logo-1.png' ?>" alt=""></a>
+                        <a href="<?php echo get_home_url(); ?>"><img src="<?php echo $fav_logo['website_logo']; ?>" alt="<?php echo esc_attr(get_bloginfo('name')); ?>"></a>
                     </div>
                     <div class="main-menu-wrapper__main-menu">
                         <a href="#" class="mobile-nav__toggler"><i class="fa fa-bars"></i></a>
@@ -41,11 +42,12 @@
                     <div class="main-menu-wrapper__right">
                         <div class="main-menu-wrapper__call">
                             <div class="main-menu-wrapper__call-icon">
-                                <img src="<?php echo get_template_directory_uri(  ).'/assets/images/icon/phone-icon.png' ?>" alt="">
+                                <?php $header_setup =  get_field('header_icon','option'); ?>
+                                <img src="<?php echo esc_url($header_setup['icon']); ?>" alt="<?php echo esc_attr(get_bloginfo('name')); ?>">
                             </div>
                             <div class="main-menu-wrapper__call-number">
-                                <p>Call Anytime</p>
-                                <h5><a href="tel:926668880000">+ 92 666 888 0000</a></h5>
+                                <p><?php echo esc_attr($header_setup['icon_title']); ?></p>
+                                <h5><a href="<?php echo esc_url($header_setup['icon_link']); ?>"><?php echo esc_attr($header_setup['icon_details']); ?></a></h5>
                             </div>
                         </div>
                         <div class="main-menu-wrapper__search-box">

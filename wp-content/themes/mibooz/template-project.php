@@ -7,102 +7,64 @@ get_header();
 ?>
 <?php require_once('inc/breadcumb.php'); ?>
 
-        <!--Project One Start-->
-        <section class="project-one">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-12">
-                        <ul class="project-filter style1 post-filter has-dynamic-filters-counter list-unstyled">
-                            <li data-filter=".filter-item" class="active"><span class="filter-text">All</span></li>
-                            <li data-filter=".bra"><span class="filter-text">Branding</span></li>
-                            <li data-filter=".photo"><span class="filter-text">Photography</span></li>
-                            <li data-filter=".web"><span class="filter-text">Web Design</span></li>
-                            <li data-filter=".app"><span class="filter-text last-pd-none">Apps</span></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="row filter-layout masonary-layout">
-                    <div class="col-xl-4 col-lg-6 col-md-6 filter-item bra photo web">
-                        <!--Portfolio One Single-->
-                        <div class="project-one__single">
-                            <div class="project-one__img">
-                                <img src="assets/images/resources/project-one-img-1.jpg" alt="">
-                                <div class="project-one__hover">
-                                    <p class="project-one__tagline">Graphic</p>
-                                    <h3 class="project-one__title"><a href="project-details.html">Fimlor Experience</a>
-                                    </h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-6 col-md-6 filter-item bra app web">
-                        <!--Portfolio One Single-->
-                        <div class="project-one__single">
-                            <div class="project-one__img">
-                                <img src="assets/images/resources/project-one-img-2.jpg" alt="">
-                                <div class="project-one__hover">
-                                    <p class="project-one__tagline">Graphic</p>
-                                    <h3 class="project-one__title"><a href="project-details.html">Fimlor Experience</a>
-                                    </h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-6 col-md-6 filter-item bra web">
-                        <!--Portfolio One Single-->
-                        <div class="project-one__single">
-                            <div class="project-one__img">
-                                <img src="assets/images/resources/project-one-img-3.jpg" alt="">
-                                <div class="project-one__hover">
-                                    <p class="project-one__tagline">Graphic</p>
-                                    <h3 class="project-one__title"><a href="project-details.html">Fimlor Experience</a>
-                                    </h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-6 col-md-6 filter-item bra photo web">
-                        <!--Portfolio One Single-->
-                        <div class="project-one__single">
-                            <div class="project-one__img">
-                                <img src="assets/images/resources/project-one-img-4.jpg" alt="">
-                                <div class="project-one__hover">
-                                    <p class="project-one__tagline">Graphic</p>
-                                    <h3 class="project-one__title"><a href="project-details.html">Fimlor Experience</a>
-                                    </h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-6 col-md-6 filter-item bra web">
-                        <!--Portfolio One Single-->
-                        <div class="project-one__single">
-                            <div class="project-one__img">
-                                <img src="assets/images/resources/project-one-img-5.jpg" alt="">
-                                <div class="project-one__hover">
-                                    <p class="project-one__tagline">Graphic</p>
-                                    <h3 class="project-one__title"><a href="project-details.html">Fimlor Experience</a>
-                                    </h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-6 col-md-6 filter-item app photo">
-                        <!--Portfolio One Single-->
-                        <div class="project-one__single">
-                            <div class="project-one__img">
-                                <img src="assets/images/resources/project-one-img-6.jpg" alt="">
-                                <div class="project-one__hover">
-                                    <p class="project-one__tagline">Graphic</p>
-                                    <h3 class="project-one__title"><a href="project-details.html">Fimlor Experience</a>
-                                    </h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<!--Project One Start-->
+<section class="project-one">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <ul class="project-filter style1 post-filter has-dynamic-filters-counter list-unstyled">
+                    <li data-filter=".filter-item" class="active"><span class="filter-text">All</span></li>
+                    <?php 
+                    
+                    $cats = get_terms('portfolio-cat');
+                    foreach($cats as $cat){ ?>
+                        <li data-filter=".<?php echo $cat->slug; ?>"><span class="filter-text"><?php echo $cat->name; ?></span></li>
+                    <?php }
+                    
+                    ?>
+                    
+                </ul>
             </div>
-        </section>
-        <!--Project One End-->
+        </div>
+        <div class="row filter-layout masonary-layout">
+            
+            <?php 
+            
+            $args = array(
+                'posts_per_page' => -1,
+                'post_type' => 'portfolio'
+            );
+            $query = new WP_Query($args);
+            while($query->have_posts()){
+            $query->the_post(); ?>
+                <div class="col-xl-4 col-lg-6 col-md-6 filter-item 
+                    <?php
+                    
+                    $catsName = get_the_terms( get_the_ID(), 'portfolio-cat' );
+                    foreach($catsName as $catName){
+                    echo $catName->slug;
+                    }
+                    
+                    ?>">
+                    <!--Portfolio One Single-->
+                    <div class="project-one__single">
+                        <div class="project-one__img">
+                            <img src="<?php echo esc_url(the_post_thumbnail_url()); ?>" alt="<?php echo esc_attr(the_title()); ?>">
+                            <div class="project-one__hover">
+                                <p class="project-one__tagline"><?php esc_attr(the_field('project_tagline')); ?></p>
+                                <h3 class="project-one__title"><a href="<?php esc_url(the_permalink( )); ?>"><?php esc_attr(the_title()); ?></a>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } 
+                wp_reset_postdata(  );
+            ?>
+
+        </div>
+    </div>
+</section>
+<!--Project One End-->
 
 <?php get_footer(); ?>

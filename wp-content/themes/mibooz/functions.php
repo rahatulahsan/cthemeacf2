@@ -28,8 +28,8 @@ function mibooz_assets(){
     wp_enqueue_style( 'font-awesome-latest', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css' );
     wp_enqueue_style( 'font-awesome-css', get_template_directory_uri() . '/assets/css/fontawesome.css', array(), '1.0.0');
     wp_enqueue_style( 'font-awesome-min', get_template_directory_uri() . '/assets/css/fontawesome.min.css', array(), '1.0.0');
-    wp_enqueue_style( 'font-awesome-brands', get_template_directory_uri() . '/assets/css/brands.css', array(), '1.0.0');
-    wp_enqueue_style( 'font-awesome-brands-min', get_template_directory_uri() . '/assets/css/brands.min.css', array(), '1.0.0');
+    //wp_enqueue_style( 'font-awesome-brands', get_template_directory_uri() . '/assets/css/brands.css', array(), '1.0.0');
+    //wp_enqueue_style( 'font-awesome-brands-min', get_template_directory_uri() . '/assets/css/brands.min.css', array(), '1.0.0');
     
 
   
@@ -51,7 +51,7 @@ function mibooz_assets(){
     wp_enqueue_script( 'odometer-js', get_template_directory_uri() . '/assets/vendors/odometer/odometer.min.js', array('jquery'), '1.0.0', true );
     wp_enqueue_script( 'swiper-js', get_template_directory_uri() . '/assets/vendors/swiper/swiper.min.js', array('jquery'), '1.0.0', true );
     wp_enqueue_script( 'tiny-slider', get_template_directory_uri() . '/assets/vendors/tiny-slider/tiny-slider.min.js', array('jquery'), '1.0.0', true );
-    wp_enqueue_script( 'vnumb-js', get_template_directory_uri() . '/assets/vendors/wnumb/wNumb.min.jss', array('jquery'), '1.0.0', true );
+    //wp_enqueue_script( 'vnumb-js', get_template_directory_uri() . '/assets/vendors/wnumb/wNumb.min.jss', array('jquery'), '1.0.0', true );
     wp_enqueue_script( 'ow-js', get_template_directory_uri() . '/assets/vendors/wow/wow.js', array('jquery'), '1.0.0', true );
     wp_enqueue_script( 'isotop-js', get_template_directory_uri() . '/assets/vendors/isotope/isotope.js', array('jquery'), '1.0.0', true );
     wp_enqueue_script( 'owl-carousel-min', get_template_directory_uri() . '/assets/vendors/owl-carousel/owl.carousel.min.js', array('jquery'), '1.0.0', true );
@@ -73,7 +73,7 @@ add_action('wp_enqueue_scripts', 'mibooz_assets');
 
 function mibooz_setup_theme(){
     add_theme_support('title-tag');
-    add_theme_support( 'post-thumbnails', array('post','services','teams','reviews', 'portfolio') );
+    add_theme_support( 'post-thumbnails', array('post','services','teams','reviews', 'portfolio', 'sliders') );
     load_theme_textdomain( 'mibooz', get_template_directory_uri(). '/assets/languages' );
     
     //setup image size
@@ -96,112 +96,7 @@ function add_nav_menus() {
 }
 add_action('init', 'add_nav_menus');
 
-function mibooz_custom_posts(){
 
-    //Register Services Post type
-    register_post_type('services', array(
-        'labels' => array(
-            'name' => __('Services', 'mibooz'),
-            'singular_name' => __('Service', 'mibooz'),
-            'add_new_item' => __('Add New Service', 'mibooz'),
-            'edit_item' => __('Edit Service', 'mibooz'),
-            'new_item' => __('New Service', 'mibooz'),
-            'new_items' => __('New Services', 'mibooz'),
-            
-        ),
-        'public' => true,
-        'show_ui' => true,
-        'supports' => array('title', 'editor', 'thumbnail', 'custom-fields'),
-        'show_in_rest' => true,
-        'menu_icon' => 'dashicons-editor-paste-word'
-    ));
-    //Register FAQ Post type
-    register_post_type('faqs', array(
-        'labels' => array(
-            'name' => __('FAQS', 'mibooz'),
-            'singular_name' => __('FAQ', 'mibooz'),
-            'add_new_item' => __('Add New FAQ', 'mibooz'),
-            'edit_item' => __('Edit FAQ', 'mibooz'),
-            'new_item' => __('New FAQ', 'mibooz'),
-            'new_items' => __('New FAQ', 'mibooz'),
-            
-        ),
-        'public' => true,
-        'show_ui' => true,
-        'supports' => array('title', 'editor', 'custom-fields'),
-        'show_in_rest' => true,
-        'menu_icon' => 'dashicons-format-quote'
-    ));
-    //Register Team Post type
-    register_post_type('teams', array(
-        'labels' => array(
-            'name' => __('Teams', 'mibooz'),
-            'singular_name' => __('Team', 'mibooz'),
-            'add_new_item' => __('Add New Team', 'mibooz'),
-            'edit_item' => __('Edit Team', 'mibooz'),
-            'new_item' => __('New Team', 'mibooz'),
-            'new_items' => __('New Teams', 'mibooz'),
-            
-        ),
-        'public' => true,
-        'show_ui' => true,
-        'supports' => array('title', 'editor','thumbnail', 'custom-fields'),
-        'show_in_rest' => true,
-        'menu_icon' => 'dashicons-admin-users'
-    ));
-        //Register Review Post type
-        register_post_type('reviews', array(
-            'labels' => array(
-                'name' => __('Reviews', 'mibooz'),
-                'singular_name' => __('Review', 'mibooz'),
-                'add_new_item' => __('Add New Review', 'mibooz'),
-                'edit_item' => __('Edit Review', 'mibooz'),
-                'new_item' => __('New Review', 'mibooz'),
-                'new_items' => __('New Reviews', 'mibooz'),
-                
-            ),
-            'public' => true,
-            'show_ui' => true,
-            'supports' => array('title', 'editor','thumbnail', 'custom-fields'),
-            'show_in_rest' => true,
-            'menu_icon' => 'dashicons-format-chat'
-        ));
-        // custom posts for Portfolio
-        register_post_type('portfolio', array(
-            'labels' => array(
-                'name' => __('Portfolios', 'efrekia'),
-                'singular_name' => __('Portfolio', 'efrekia'),
-                'add_new_item' => __('Add New Portfolio', 'efrekia'),
-                'edit_item' => __('Edit Portfolio', 'efrekia'),
-                'new_item' => __('New Portfolio', 'efrekia'),
-                'new_items' => __('New Portfolios', 'efrekia'),
-                
-            ),
-            'public' => true,
-            'show_ui' => true,
-            'supports' => array('title', 'editor','thumbnail', 'custom-fields'),
-            'menu_icon' => 'dashicons-format-gallery',
-        ));
-        
-        // Register Taxonomy for Portfolio Post Type
-        register_taxonomy( 'portfolio-cat', 'portfolio', array(
-            'labels' => array(
-                'name' => __('Categories', 'efrekia'),
-                'singular_name' => __('Category', 'efrekia')
-            ),
-            'rewrite' => array(
-                'slug' => 'portfolio',
-                'with_front' => false,
-                'hierarchical' => true
-            ),
-            'hierarchical' => true,
-            'show_admin_column' => true
-
-        ) );
-
-}
-
-add_action('init', 'mibooz_custom_posts');
 
 
 // Options for Theme Settings
@@ -214,6 +109,11 @@ if( function_exists('acf_add_options_page') ) {
         'menu_slug'     => 'theme-general-settings',
         'capability'    => 'edit_posts',
         'redirect'      => false
+    ));
+    acf_add_options_sub_page(array(
+        'page_title'    => 'Header Settings',
+        'menu_title'    => 'Header',
+        'parent_slug'   => 'theme-general-settings',
     ));
     
     acf_add_options_sub_page(array(
@@ -231,9 +131,47 @@ if( function_exists('acf_add_options_page') ) {
         'menu_title'    => 'CTA',
         'parent_slug'   => 'theme-general-settings',
     ));
+    acf_add_options_sub_page(array(
+        'page_title'    => 'Footer Settings',
+        'menu_title'    => 'Footer',
+        'parent_slug'   => 'theme-general-settings',
+    ));
 
 }
 
+// All Widgets here
+function mibooz_widgets(){
+    register_sidebar( array(
+		'name'          => __( 'Footer Widget 1', 'efrekia' ),
+		'id'            => 'footerwidget-1',
+		'description'   => __( 'Widgets in this area will be shown on all posts and pages.', 'efrekia' ),
+		'before_widget' => '<div class="footer-widget__column footer-widget__contact">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h3>',
+		'after_title'   => '</h3>'
+	) );
+    register_sidebar( array(
+		'name'          => __( 'Footer Widget 2', 'efrekia' ),
+		'id'            => 'footerwidget-2',
+		'description'   => __( 'Widgets in this area will be shown on all posts and pages.', 'efrekia' ),
+		'before_widget' => '<ul class="footer-widget__links-list list-unstyled clearfix ">',
+		'after_widget'  => '</ul>',
+		'before_title'  => '',
+		'after_title'   => ''
+	) );
+    register_sidebar( array(
+		'name'          => __( 'Footer Widget 3', 'efrekia' ),
+		'id'            => 'footerwidget-3',
+		'description'   => __( 'Widgets in this area will be shown on all posts and pages.', 'efrekia' ),
+		'before_widget' => '<ul class="footer-widget__links-list footer-widget__links-list-two list-unstyled clearfix ">',
+		'after_widget'  => '</ul>',
+		'before_title'  => '',
+		'after_title'   => ''
+	) );
+}
+
+
+add_action('widgets_init','mibooz_widgets');
 
 
 
