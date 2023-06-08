@@ -31,7 +31,7 @@ get_header();
             <?php 
             
             $args = array(
-                'posts_per_page' => -1,
+                'posts_per_page' => 3,
                 'post_type' => 'portfolio'
             );
             $query = new WP_Query($args);
@@ -63,6 +63,7 @@ get_header();
             ?>
 
         </div>
+        <?php echo do_shortcode('[ajax_load_more container_type="div" transition_container_classes="row large-12" post_type="portfolio" posts_per_page="3" pause="true" offset="2" button_done_label="No More Projects...."]'); ?>
     </div>
 </section>
 <!--Project One End-->

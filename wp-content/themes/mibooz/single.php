@@ -35,33 +35,14 @@ get_header();
                     </div>
                     
                     <div class="comment-one">
-                        <h3 class="comment-one__title">2 Comments</h3>
-                        <div class="comment-one__single">
-                            <div class="comment-one__image">
-                                <img src="assets/images/blog/comment-1-1.jpg" alt="">
-                            </div>
-                            <div class="comment-one__content">
-                                <h3>Kevin Martin</h3>
-                                <p>It has survived not only five centuries, but also the leap into electronic typesetting unchanged. It was popularised in the sheets containing lorem ipsum is simply free text.</p>
-                                <a href="blog-details.html" class="thm-btn comment-one__btn">Reply</a>
-                            </div>
-                        </div>
-                        <div class="comment-one__single">
-                            <div class="comment-one__image">
-                                <img src="assets/images/blog/comment-1-2.jpg" alt="">
-                            </div>
-                            <div class="comment-one__content">
-                                <h3>Kevin albert</h3>
-                                <p>It has survived not only five centuries, but also the leap into electronic typesetting unchanged. It was popularised in the sheets containing lorem ipsum is simply free text.</p>
-                                <a href="blog-details.html" class="thm-btn comment-one__btn">Reply</a>
-                            </div>
-                        </div>
+                        
+                        <?php wp_list_comments(); ?>
+                        
                     </div>
                     <div class="comment-form">
-                        <h3 class="comment-form__title">Leave a Comment</h3>
                         <?php 
                         
-                            if(comments_open ()){
+                            if(comments_open () || get_comments_number()){
                                 comments_template();
                             }
 

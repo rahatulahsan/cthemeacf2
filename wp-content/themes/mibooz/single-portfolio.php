@@ -81,14 +81,28 @@
             <div class="col-xl-12">
                 <div class="project-details__pagination-box">
                     <ul class="project-details__pagination list-unstyled">
-                        <li class="next">
-                            <a href="#" aria-label="Previous"><i class="icon-arrow-left"></i>Previous</a>
-                        </li>
+                    
+                    <?php 
+                    
+                    $adjacent = get_adjacent_post(false, '', true);
 
-                        <li class="previous">
-                            <a href="#" aria-label="Next">Next<i class="icon-arrow-right"></i></a>
+                    $adjacent_next = get_adjacent_post(false, '', false);
+                    
+                    ?>
+
+                    <?php if ( (get_adjacent_post(false, '', true)) ) { ?>
+                        <li class="next">
+                            <a href="<?php echo get_post_permalink($adjacent->ID); ?>" aria-label="Previous"><i class="icon-arrow-left"></i>Previous</a>
                         </li>
+                    <?php } if ( (get_adjacent_post(false, '', false)) ){ ?>
+                        <li class="previous">
+                            <a href="<?php echo get_post_permalink($adjacent_next->ID); ?>" aria-label="Next">Next<i class="icon-arrow-right"></i></a>
+                        </li>
+                    <?php } ?>
+ 
                     </ul>
+
+
                 </div>
             </div>
         </div>
@@ -100,8 +114,9 @@
 <section class="similar-work">
     <div class="container">
         <div class="section-title text-center">
-            <span class="section-title__tagline">recent projects</span>
-            <h2 class="section-title__title">similar work</h2>
+            <?php $single_project = get_field('single_project_settings','option'); ?>
+            <span class="section-title__tagline"><?php echo esc_attr($single_project['bottom_recent_project_subtitle']); ?></span>
+            <h2 class="section-title__title"><?php echo esc_attr($single_project['bottom_recent_project_title']); ?></h2>
         </div>
         <div class="row">
 

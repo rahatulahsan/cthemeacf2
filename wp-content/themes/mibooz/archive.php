@@ -7,7 +7,7 @@ get_header();
 ?>
 <!--Page Header Start-->
 <section class="page-header">
-    <div class="page-header-bg" style="background-image: url(<?php echo get_template_directory_uri(  ).'/assets/images/backgrounds/page-header-bg.jpg' ?>)">
+    <div class="page-header-bg" style="background-image: url(<?php echo esc_url(the_field('header_background', 'option')); ?>)">
     </div>
     <div class="container">
         <div class="page-header__inner">

@@ -132,6 +132,11 @@ if( function_exists('acf_add_options_page') ) {
         'parent_slug'   => 'theme-general-settings',
     ));
     acf_add_options_sub_page(array(
+        'page_title'    => '404 Settings',
+        'menu_title'    => '404',
+        'parent_slug'   => 'theme-general-settings',
+    ));
+    acf_add_options_sub_page(array(
         'page_title'    => 'Footer Settings',
         'menu_title'    => 'Footer',
         'parent_slug'   => 'theme-general-settings',
@@ -175,6 +180,24 @@ add_action('widgets_init','mibooz_widgets');
 
 
 
+//Moving Comment form at the bottom for Blog
+function mibooz_move_comment_field_to_bottom( $fields ) {
+    $comment_field = $fields['comment'];
+    unset( $fields['comment'] );
+    $fields['comment'] = $comment_field;
+    return $fields;
+    }
+     
+add_filter( 'comment_form_fields', 'mibooz_move_comment_field_to_bottom');
+
+// Remove Webiste field from the Form
+function mibooz_remove_comment_url($arg) {
+    $arg['url'] = '';
+    return $arg;
+    }
+     
+    add_filter('comment_form_default_fields', 'mibooz_remove_comment_url');
+    
 
 
 ?>

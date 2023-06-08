@@ -2,7 +2,7 @@
 
 <!--Page Header Start-->
 <section class="page-header">
-    <div class="page-header-bg" style="background-image: url(<?php echo get_template_directory_uri(  ).'/assets/images/backgrounds/page-header-bg.jpg' ?>)">
+    <div class="page-header-bg" style="background-image: url(<?php echo esc_url(the_field('header_background', 'option')); ?>)">
     </div>
     <div class="container">
         <div class="page-header__inner">
@@ -23,15 +23,21 @@
             <div class="col-xl-12">
                 <div class="error-page__inner">
                     <h2 class="error-page__title">404</h2>
-                    <h3 class="error-page__tagline">Sorry We Can't Find <br> That Page!</h3>
-                    <p class="error-page__text">The page you are looking for was never existed.</p>
-                    <form class="error-page__form">
-                        <div class="error-page__form-input">
-                            <input type="search" placeholder="Search here">
-                            <button type="submit"><i class="icon-magnifying-glass"></i></button>
-                        </div>
-                    </form>
-                    <a href="<?php echo site_url(); ?>" class="thm-btn error-page__btn">back to home</a>
+                    <h3 class="error-page__tagline"><?php esc_attr(the_field('main_title','option')); ?></h3>
+                    <p class="error-page__text"><?php esc_attr(the_field('content','option')); ?></p>
+                    <?php $search_bar = get_field('showhide_search_bar','option'); 
+                    
+                        if($search_bar == 1){?>
+                            <form class="error-page__form">
+                                <div class="error-page__form-input">
+                                    <input type="search" placeholder="Search here">
+                                    <button type="submit"><i class="icon-magnifying-glass"></i></button>
+                                </div>
+                            </form>
+                        <?php }else{}
+                    ?>
+                    
+                    <a href="<?php esc_attr(the_field('button_link','option')); ?>" class="thm-btn error-page__btn"><?php esc_attr(the_field('button_text','option')); ?></a>
                 </div>
             </div>
         </div>
